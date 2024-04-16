@@ -15,3 +15,5 @@ echo "Init Alias "
 ./components/initAlias.sh
 echo "Configurando Git"
 ./components/gitconfi.sh
+
+zsh

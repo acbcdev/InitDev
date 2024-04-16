@@ -16,8 +16,10 @@ if [ "$package_manager" == "dnf" ]; then
 
   sudo dnf update
   sudo dnf install $dependencias
+
   echo "Instalando gh"
   ./installgh.sh dnf
+
 elif [ "$package_manager" == "apt" ]; then
 
   sudo apt update

@@ -7,10 +7,16 @@ echo "Instalando programas by Curl"
 echo "Instalando Node"
 ./components/installNode.sh
 echo "Creando directorios de desarrollo"
-mkdir "$HOME"/Dev
-mkdir "$HOME"/Dev/Proyectos
-mkdir "$HOME"/Dev/Platzi
-mkdir "$HOME"/Dev/Cmt
+if [ -d "$HOME/Dev" ]; then
+  echo "Directorio Dev ya existe"
+else
+  echo "Creando directorio Dev"
+  mkdir "$HOME"/Dev
+  mkdir "$HOME"/Dev/Proyectos
+  mkdir "$HOME"/Dev/Platzi
+  mkdir "$HOME"/Dev/Cmt
+fi
+
 if [ -d "$HOME/.oh-my-zsh" ]; then
   echo "Oh my zsh ya esta instalado"
 else

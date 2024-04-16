@@ -18,19 +18,19 @@ if [ "$package_manager" == "dnf" ]; then
   sudo dnf install $dependencias
 
   echo "Instalando gh"
-  ./installgh.sh "dnf"
+  ./install_gh.sh "dnf"
 
 elif [ "$package_manager" == "apt" ]; then
 
   sudo apt update
   sudo apt install $dependencias
   echo "Instalando gh"
-  ./installgh.sh "apt"
+  ./install_gh.sh "apt"
 elif [ "$package_manager" == "pacman" ]; then
   sudo pacman -Syu
   sudo pacman -S $dependencias
   echo "Instalando gh"
-  ./installgh.sh "pacman"
+  ./install_gh.sh "pacman"
 else
   echo "Invalid package manager"
   exit 1

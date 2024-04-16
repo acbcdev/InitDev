@@ -15,18 +15,18 @@ done
 if [ "$package_manager" == "dnf" ]; then
 
   sudo dnf update
-  sudo dnf install "$dependencias"
+  sudo dnf install $dependencias
   echo "Instalando gh"
   ./installgh.sh dnf
 elif [ "$package_manager" == "apt" ]; then
 
   sudo apt update
-  sudo apt install "$dependencias"
+  sudo apt install $dependencias
   echo "Instalando gh"
   ./installgh.sh apt
 elif [ "$package_manager" == "pacman" ]; then
   sudo pacman -Syu
-  sudo pacman -S "$dependencias"
+  sudo pacman -S $dependencias
   echo "Instalando gh"
   ./installgh.sh pacman
 else

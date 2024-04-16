@@ -3,7 +3,7 @@
 # Instalando dependencias gh about package manager
 
 package=$1
-
+echo "Instalando gh"
 if [ "$package" == "dnf" ]; then
   sudo dnf install 'dnf-command(config-manager)'
   sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo

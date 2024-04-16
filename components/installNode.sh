@@ -5,10 +5,7 @@
 
 if [ -d "$HOME/.nvm" ]; then
   echo "Nvm ya esta instalado"
-  nvm i node
-  npm i -g pnpm
-  npm i -g yarn
-  npm i -g nodemon
+  nvm i node && npm i -g pnpm && npm i -g yarn && npm i -g nodemon
 else
   echo "Instalando Nvm"
 

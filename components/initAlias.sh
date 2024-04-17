@@ -37,6 +37,8 @@ alias=(
   "alias ggsta='git status'"
   "alias gglog='git log'"
   "alias ggswi='git switch'"
+  "alias cb='cd ..'"
+  "alias rgr='ranger'"
 )
 
 zshrc="${HOME}/.zshrc"

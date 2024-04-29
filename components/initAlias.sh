@@ -25,7 +25,7 @@ alias=(
   "alias cl='clear'"
   "alias toUpdate='sudo dnf update'"
   "alias toInstall='sudo dnf install'"
-  "alias pl='ping 8.8.8.8 | lolcat'"
+  "alias pl='ping 8.8.8.8 '"
   "alias hm='cd ~'"
   "alias hd='cd ~/Dev/'"
   "alias projs='cd ~/Dev/Proyectos/'"
@@ -38,7 +38,12 @@ alias=(
   "alias gglog='git log'"
   "alias ggswi='git switch'"
   "alias cb='cd ..'"
+  "alias cbb='cd ../..'"
   "alias rgr='ranger'"
+ "alias adios='poweroff'"	
+ "alias speedtest='speedtest-cli'"
+ "alias neo='neofetch'"
+
 )
 
 zshrc="${HOME}/.zshrc"

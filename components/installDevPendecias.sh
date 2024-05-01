@@ -4,7 +4,7 @@
 # selecionar admin de devpendencias dnf apt pacman
 # dependencias git Curl zsh ranger lolcat exa
 
-dependencias="git curl zsh ranger lolcat exa neofetch"
+dependencias="git curl zsh ranger lolcat exa fastfetch"
 read -rp "Choose your package manager (dnf pacman apt): " package_manager
 
 while [ "$package_manager" != "dnf" ] && [ "$package_manager" != "apt" ] && [ "$package_manager" != "pacman" ]; do

@@ -42,7 +42,7 @@ alias=(
   "alias rgr='ranger'"
  "alias adios='poweroff'"	
  "alias speedtest='speedtest-cli'"
- "alias neo='neofetch'"
+ "alias neo='fastfetch'"
 
 )
 

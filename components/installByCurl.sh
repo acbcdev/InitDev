@@ -9,3 +9,9 @@ if [ -d "$HOME/.bun" ]; then
 else
   curl -fsSL https://bun.sh/install | bash
 fi
+
+if [ -d "$HOME/.fnm" ]; then
+  echo "fnm ya esta instalado"
+else
+  curl -fsSL https://fnm.vercel.app/install | bash
+fi

@@ -17,6 +17,7 @@ add_alias_if_not_exist() {
 
 alias=(
   "# ----General alias----"
+  "alias enebleNeoCode='sudo chown -R $USER /usr/share/code/sudo chown -R $USER /usr/share/code/'"
   "alias adios='poweroff'"
   "alias spdt='speedtest-cli'"
   "alias hola='brave-browser &'"W

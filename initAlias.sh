@@ -29,7 +29,7 @@ alias=(
   "alias pnpmt='pnpm run test'"
   "alias cl='clear'"
   "alias neo='fastfetch'"
-  "alias toUpdate='sudo dnf update'"
+  "alias toUpdate='sudo  update'"
   "alias toInstall='toUpdate &&  sudo dnf install'"
   "alias pl='ping 8.8.8.8'"
   "alias cb='cd ..'"
@@ -39,6 +39,9 @@ alias=(
   "# ---Dir alias"
   "alias hm='cd ~'"
   "alias hd='cd ~/Dev/'"
+  "alias hi='cd ~/Imágenes'"
+  "alias hw='cd ~/Descargas'"
+  "alias hdo='cd ~/Documentos'"
   "alias projs='cd ~/Dev/Proyectos/'"
   "alias study='cd ~/Dev/Platzi/'"
   "alias OpenSrc='cd ~/Dev/Cmt'"
@@ -54,6 +57,7 @@ alias=(
 zshrc="${HOME}/.zshrc"
 
 if [ -w "$zshrc" ]; then
+
   # Añadir cada alias de la lista si no existe
   for ali in "${alias[@]}"; do
     add_alias_if_not_exist "$ali"

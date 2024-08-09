@@ -18,6 +18,7 @@ add_alias_if_not_exist() {
 alias=(
   "# ----General alias----"
   "alias enebleNeoCode='sudo chown -R $USER /usr/share/code/'"
+  "alias hola='warp-terminal && code && flatpak run com.brave.Browser '"
   "alias adios='poweroff'"
   "alias spdt='speedtest-cli'"
   "alias hola='brave-browser &'"W
@@ -29,6 +30,7 @@ alias=(
   "alias pnpms='pnpm run start'"
   "alias pnpmt='pnpm run test'"
   "alias pnpmr='pnpm run'"
+  "alias pnpmp='pnpm preview'"
   "alias pnpmi='pnpm install'"
   "alias npmd='npm run dev'"
   "alias npmb='npm run build'"
@@ -62,7 +64,7 @@ alias=(
   "alias ggsta='git status'"
   "alias gglog='git log'"
   "alias ggswi='git switch'"
-)
+  )
 
 zshrc="${HOME}/.zshrc"
 

@@ -57,6 +57,7 @@ alias=(
   "alias projs='cd ~/Dev/Proyectos/'"
   "alias study='cd ~/Dev/Platzi/'"
   "alias OpenSrc='cd ~/Dev/Cmt'"
+  "alias prueba='cd ~/Dev/Try'"
   "# ---Git alias"
   "alias ggclone='git clone'"
   "alias ggcmt='git commit -am'"

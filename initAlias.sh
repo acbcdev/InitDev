@@ -46,6 +46,7 @@ alias=(
   "alias pl='ping 8.8.8.8'"
   "alias cb='cd ..'"
   "alias cbb='cd ../..'"
+  "alias lzg='lazygit'"
   "alias rgr='ranger'"
   "alias rmf='rm -rf'"
   "# ---Dir alias"

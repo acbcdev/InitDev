@@ -45,6 +45,7 @@ alias=(
   "alias toInstall='toUpdate &&  sudo dnf install'"
   "alias pl='ping 8.8.8.8'"
   "alias cb='cd ..'"
+  "alias cd='z'"
   "alias cbb='cd ../..'"
   "alias lg='lazygit'"
   "alias rgr='ranger'"

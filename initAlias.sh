@@ -25,6 +25,7 @@ alias=(
   "alias le='exa --level=1 --tree --icons'"
   "alias lr='exa --tree --level=1 --all --icons'"
   "# ---Alias para Package Manager Node ---"
+  "alias pnpmx='pnpm dlx'"
   "alias pnpmd='pnpm run dev'"
   "alias pnpmb='pnpm run build'"
   "alias pnpms='pnpm run start'"
@@ -41,7 +42,7 @@ alias=(
   "# ---Alias para Llamar a un alias de otro"
   "alias cl='clear'"
   "alias neo='fastfetch'"
-  "alias toUpdate='sudo  update'"
+  "alias toUpdate='sudo dnf update'"
   "alias toInstall='toUpdate &&  sudo dnf install'"
   "alias pl='ping 8.8.8.8'"
   "alias cb='cd ..'"
@@ -67,7 +68,7 @@ alias=(
   "alias ggsta='git status'"
   "alias gglog='git log'"
   "alias ggswi='git switch'"
-  )
+)
 
 zshrc="${HOME}/.zshrc"
 

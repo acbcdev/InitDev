@@ -18,7 +18,6 @@ add_alias_if_not_exist() {
 alias=(
   "# ----General alias----"
   "alias enebleNeoCode='sudo chown -R $USER /usr/share/code/'"
-  "alias hola='warp-terminal && code && flatpak run com.brave.Browser '"
   "alias adios='poweroff'"
   "alias spdt='speedtest-cli'"
   "alias hola='brave-browser &'"W
@@ -52,6 +51,7 @@ alias=(
   "alias rgr='ranger'"
   "alias rmf='rm -rf'"
   "# ---Dir alias"
+  "alias this='code .'"
   "alias hm='cd ~'"
   "alias hd='cd ~/Dev/'"
   "alias hi='cd ~/Imágenes'"

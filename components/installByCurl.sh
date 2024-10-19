@@ -12,6 +12,8 @@ fi
 
 if [ -d "$HOME/.fnm" ]; then
   echo "fnm ya esta instalado"
+  source
+  fnm install --lts
 else
   curl -fsSL https://fnm.vercel.app/install | bash
 fi

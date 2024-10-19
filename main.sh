@@ -7,6 +7,8 @@ echo "Instalando programas by Curl"
 echo "Instalando Node"
 ./components/installNode.sh
 echo "Creando directorios de desarrollo"
+
+
 if [ -d "$HOME/Dev" ]; then
   echo "Directorio Dev ya existe"
 else
@@ -18,6 +20,6 @@ else
 fi
 
 echo "Configurando Git"
-./components/gitconfi.sh
+./components/gitConfi.sh
 
-source "$HOME"/.zshrc
+echo "Reload your shell"

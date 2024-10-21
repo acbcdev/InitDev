@@ -38,6 +38,7 @@ alias=(
   "alias npmt='npm run test'"
   "alias npmr='npm run'"
   "alias npmi='npm install'"
+  "alias checkNodeVersion='pnpmx is-my-node-vulnerable'"
   "# ---Alias para Llamar a un alias de otro"
   "alias cl='clear'"
   "alias neo='fastfetch'"

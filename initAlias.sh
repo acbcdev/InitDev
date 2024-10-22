@@ -37,6 +37,7 @@ alias=(
   "alias npms='npm run start'"
   "alias npmt='npm run test'"
   "alias npmr='npm run'"
+  "alias xUnligthouse='npx unlighthouse --site'"
   "alias npmi='npm install'"
   "alias checkNodeVersion='pnpmx is-my-node-vulnerable'"
   "# ---Alias para Llamar a un alias de otro"

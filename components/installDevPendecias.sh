@@ -13,7 +13,6 @@ while [ "$package_manager" != "dnf" ] && [ "$package_manager" != "apt" ] && [ "$
 done
 
 if [ "$package_manager" == "dnf" ]; then
-
   sudo dnf update
   sudo dnf install "$dependencias"
   sudo dnf copr enable atim/lazygit -y

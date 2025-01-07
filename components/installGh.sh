@@ -4,9 +4,9 @@
 instalar_gh() {
   packageManager=$1
   if [ "$packageManager" == "dnf" ]; then
-    sudo dnf install 'dnf-command(config-manager)'
-    sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
-    sudo dnf install gh
+    sudo dnf install dnf5-plugins
+    sudo dnf config-manager addrepo --from-repofile=https://cli.github.com/packages/rpm/gh-cli.repo
+    sudo dnf install gh --repo gh-cli
   elif [ "$packageManager" == "apt" ]; then
     (type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y)) &&
       sudo mkdir -p -m 755 /etc/apt/keyrings &&

@@ -17,3 +17,5 @@ if [ -d "$HOME/.fnm" ]; then
 else
   curl -fsSL https://fnm.vercel.app/install | bash
 fi
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

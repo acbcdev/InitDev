@@ -10,3 +10,4 @@ sudo dnf install code code-insiders
 flatpak install flathub com.brave.Browser
 flatpak install flathub io.github.andreibachim.shortcut
 flatpak install flathub org.gnome.Extensions
+flatpak install flathub com.bitwarden.desktop

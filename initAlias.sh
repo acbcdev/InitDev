@@ -70,6 +70,7 @@ alias=(
   "alias ggsta='git status'"
   "alias gglog='git log'"
   "alias ggswi='git switch'"
+  "alias reload='source $HOME/.zshrc'"
 )
 
 zshrc="${HOME}/.zshrc"

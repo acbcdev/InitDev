@@ -71,6 +71,7 @@ alias=(
   "alias gglog='git log'"
   "alias ggswi='git switch'"
   "alias reload='source $HOME/.zshrc'"
+  "alias btop='bpytop'"
 )
 
 zshrc="${HOME}/.zshrc"

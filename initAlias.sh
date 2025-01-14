@@ -80,7 +80,7 @@ if [ -w "$zshrc" ]; then
 
   # Añadir cada alias de la lista si no existe
   for ali in "${alias[@]}"; do
-    add_alias_if_not_exist "$ali"
+    add_alias_if_not_exist "\n$ali"
   done
 else
   echo "Error: El archivo $zshrc no existe o no se puede escribir en él."

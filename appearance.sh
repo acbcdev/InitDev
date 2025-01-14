@@ -32,5 +32,5 @@ sudo dnf install gnome-tweaks yaru-theme
 
 # custom grub
 git clone https://github.com/vinceliuice/Elegant-grub2-themes.git
-sudo ./Elegant-grub2-themes/install.sh  -s 2k -p window 
+sudo ./Elegant-grub2-themes/install.sh -p window 
 rm -rf ./Elegant-grub2-themes

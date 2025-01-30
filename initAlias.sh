@@ -1,29 +1,108 @@
 #!/bin/bash
 
-add_alias_if_not_exist() {
-  local new_alias=$1
-  local alias_name
-  # Extraer el nombre del alias
-  alias_name=$(echo "$new_alias" | grep -oE "^alias \S+")
+# Script: initAlias.sh
+# Description: Initialize and manage aliases for zsh shell
+# Author: ACBC
+# Last Modified: 2025-01-30
 
-  # Verificar si el alias ya existe en el .zshrc
-  if grep -q "$alias_name" "$zshrc"; then
-    echo "El alias ${alias_name#alias } ya existe."
-  else
-    echo "$new_alias" >>"$zshrc"
-    echo "Alias ${alias_name#alias } añadido."
+# set -e # Exit on error
+# set -u # Exit on undefined variable
+
+# Configuration
+ZSHRC="${HOME}/.zshrc"
+BACKUP_DIR="${HOME}/.zshrc_backups"
+VERBOSE=false
+
+# Helper functions
+log() {
+  local level=$1
+  shift
+  local message=$*
+  if [ "$VERBOSE" = true ] || [ "$level" = "ERROR" ]; then
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$level] $message"
   fi
 }
 
-alias=(
-  "# ----General alias----"
-  "alias enebleNeoCode='sudo chown -R $USER /usr/share/code/'"
+# Help message
+show_help() {
+    cat << EOF
+Usage: $SCRIPT_NAME [OPTIONS]
+Initialize development aliases and configurations.
+
+Options:
+    -v, --verbose    Enable verbose logging
+    -h, --help       Show this help message
+    -V, --version    Show version information
+
+Examples:
+    $SCRIPT_NAME --verbose
+    $SCRIPT_NAME --help
+EOF
+}
+
+
+
+create_backup() {
+  local backup_file="${BACKUP_DIR}/zshrc_$(date '+%Y%m%d_%H%M%S').bak"
+  mkdir -p "$BACKUP_DIR"
+  cp "$ZSHRC" "$backup_file"
+  log "INFO" "Created backup at $backup_file"
+}
+
+add_alias_if_not_exist() {
+  local new_alias=$1
+  local alias_name
+
+  # Skip empty lines and comments
+  [[ "$new_alias" =~ ^[[:space:]]*$ || "$new_alias" =~ ^[[:space:]]*# ]] && return
+
+  # Extract alias name
+  alias_name=$(echo "$new_alias" | grep -oE "^alias \S+=" || echo "")
+
+  if [ -z "$alias_name" ]; then
+    log "WARN" "Invalid alias format: $new_alias"
+    return
+  fi
+
+  # Check if alias already exists
+  if grep -q "^${alias_name}" "$ZSHRC" 2>/dev/null; then
+    log "INFO" "Alias ${alias_name#alias } already exists"
+  else
+    echo "$new_alias" >>"$ZSHRC"
+    log "INFO" "Added alias ${alias_name#alias }"
+  fi
+}
+
+parse_arguments() {
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -v|--verbose)
+                VERBOSE=true
+                log "INFO" "Verbose mode enabled"
+                shift
+                ;;
+            -h|--help)
+                show_help
+                exit 0
+                ;;
+            *)
+                log "ERROR" "Unknown option: $1"
+                show_help
+                exit 1
+                ;;
+        esac
+    done
+}
+
+# Main alias definitions
+declare -a ALIASES=(
+  "# ----General Aliases----"
+  "alias enableNeoCode='sudo chown -R $USER /usr/share/code/'"
   "alias adios='poweroff'"
   "alias spdt='speedtest-cli'"
-  "alias hola='brave-browser &'"W
   "alias le='exa --level=1 --tree --icons'"
   "alias lr='exa --tree --level=1 --all --icons'"
-  "# ---Alias para Package Manager Node ---"
+  "# ----Package Manager Aliases----"
   "alias pnpmx='pnpm dlx'"
   "alias pnpmd='pnpm run dev'"
   "alias pnpmb='pnpm run build'"
@@ -37,14 +116,15 @@ alias=(
   "alias npms='npm run start'"
   "alias npmt='npm run test'"
   "alias npmr='npm run'"
-  "alias xUnligthouse='pnpm dlx unlighthouse --site'"
   "alias npmi='npm install'"
+  "alias xUnlighthouse='pnpm dlx unlighthouse --site'"
   "alias checkNodeVersion='pnpmx is-my-node-vulnerable'"
-  "# ---Alias para Llamar a un alias de otro"
+
+  "# ----Navigation Aliases----"
   "alias cl='clear'"
   "alias neo='fastfetch'"
   "alias toUpdate='sudo dnf update'"
-  "alias toInstall='toUpdate &&  sudo dnf install'"
+  "alias toInstall='toUpdate && sudo dnf install'"
   "alias pl='ping 8.8.8.8'"
   "alias cb='cd ..'"
   "alias cd='z'"
@@ -52,7 +132,8 @@ alias=(
   "alias lg='lazygit'"
   "alias rgr='ranger'"
   "alias rmf='rm -rf'"
-  "# ---Dir alias"
+
+  "# ----Directory Shortcuts----"
   "alias this='code .'"
   "alias hm='cd ~'"
   "alias hd='cd ~/Dev/'"
@@ -63,25 +144,51 @@ alias=(
   "alias study='cd ~/Dev/Platzi/'"
   "alias OpenSrc='cd ~/Dev/Cmt'"
   "alias prueba='cd ~/Dev/Try'"
-  "# ---Git alias"
+
+  "# ----Git Aliases----"
   "alias ggclone='git clone'"
   "alias ggcmt='git commit -am'"
   "alias ggadd='git add .'"
   "alias ggsta='git status'"
   "alias gglog='git log'"
   "alias ggswi='git switch'"
+
+  "# ----System Aliases----"
   "alias reload='source $HOME/.zshrc'"
   "alias btop='bpytop'"
+  "alias python='python3'"
+
+  "# ----Ollama Aliases----"
+  "alias ol='ollama'"
+  "alias olr='ollama run'"
+  "alias oll='ollama list'"
+  "alias olp='ollama ps'"
+  "alias ols='ollama stop'"
+  "alias olrm='ollama rm'"
 )
 
-zshrc="${HOME}/.zshrc"
+# Main execution
+main() {
+  # Check if zshrc exists and is writable
+  if [ ! -f "$ZSHRC" ]; then
+    log "ERROR" "File $ZSHRC does not exist"
+    exit 1
+  fi
 
-if [ -w "$zshrc" ]; then
+  # Create backup before making changes
+  create_backup
 
-  # Añadir cada alias de la lista si no existe
-  for ali in "${alias[@]}"; do
-    add_alias_if_not_exist "\n$ali"
+  # Process each alias
+  local count=0
+  for alias_def in "${ALIASES[@]}"; do
+    add_alias_if_not_exist "$alias_def"
+    ((count++))
   done
-else
-  echo "Error: El archivo $zshrc no existe o no se puede escribir en él."
-fi
+
+  log "INFO" "Successfully processed $count aliases"
+  log "INFO" "To apply changes, run: source $ZSHRC"
+}
+
+# Run main function
+parse_arguments "$@"
+main

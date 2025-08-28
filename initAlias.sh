@@ -25,7 +25,7 @@ log() {
 
 # Help message
 show_help() {
-    cat << EOF
+  cat <<EOF
 Usage: $SCRIPT_NAME [OPTIONS]
 Initialize development aliases and configurations.
 
@@ -39,8 +39,6 @@ Examples:
     $SCRIPT_NAME --help
 EOF
 }
-
-
 
 create_backup() {
   local backup_file="${BACKUP_DIR}/zshrc_$(date '+%Y%m%d_%H%M%S').bak"
@@ -74,24 +72,24 @@ add_alias_if_not_exist() {
 }
 
 parse_arguments() {
-    while [[ $# -gt 0 ]]; do
-        case "$1" in
-            -v|--verbose)
-                VERBOSE=true
-                log "INFO" "Verbose mode enabled"
-                shift
-                ;;
-            -h|--help)
-                show_help
-                exit 0
-                ;;
-            *)
-                log "ERROR" "Unknown option: $1"
-                show_help
-                exit 1
-                ;;
-        esac
-    done
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+    -v | --verbose)
+      VERBOSE=true
+      log "INFO" "Verbose mode enabled"
+      shift
+      ;;
+    -h | --help)
+      show_help
+      exit 0
+      ;;
+    *)
+      log "ERROR" "Unknown option: $1"
+      show_help
+      exit 1
+      ;;
+    esac
+  done
 }
 
 # Main alias definitions
@@ -103,6 +101,14 @@ declare -a ALIASES=(
   "alias le='exa --level=1 --tree --icons'"
   "alias lr='exa --tree --level=1 --all --icons'"
   "# ----Package Manager Aliases----"
+  "alias bund='bun dev'"
+  "alias bunb='bun run build'"
+  "alias bunf='bun run format'"
+  "alias bunt='bun run test'"
+  "alias bunr='bun run'"
+  "alias buns='bun run start'"
+  "alias buni='bun i'"
+  "alias bunp='bun run preview'"
   "alias pnpmx='pnpm dlx'"
   "alias pnpmd='pnpm run dev'"
   "alias pnpmb='pnpm run build'"

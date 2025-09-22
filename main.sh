@@ -14,9 +14,9 @@ if [ -d "$HOME/Dev" ]; then
 else
   echo "Creando directorio Dev"
   mkdir "$HOME"/Dev
-  mkdir "$HOME"/Dev/Proyectos
-  mkdir "$HOME"/Dev/Platzi
-  mkdir "$HOME"/Dev/Cmt
+  mkdir "$HOME"/Dev/projects
+  mkdir "$HOME"/Dev/platzi
+  mkdir "$HOME"/Dev/cmt
 fi
 
 echo "Configurando Git"

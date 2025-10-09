@@ -171,6 +171,10 @@ declare -a ALIASES=(
   "alias olp='ollama ps'"
   "alias ols='ollama stop'"
   "alias olrm='ollama rm'"
+
+  "# ---- Init Apps ----"
+  "eval "$(zoxide init zsh)"
+  "eval "$(fnm env)"
 )
 
 # Main execution

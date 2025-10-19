@@ -11,7 +11,7 @@
 # Configuration
 ZSHRC="${HOME}/.zshrc"
 BACKUP_DIR="${HOME}/.zshrc_backups"
-VERBOSE=false
+VERBOSE=true
 
 # Helper functions
 log() {
@@ -30,7 +30,7 @@ Usage: $SCRIPT_NAME [OPTIONS]
 Initialize development aliases and configurations.
 
 Options:
-    -v, --verbose    Enable verbose logging
+    -v, --verbose    Unenable verbose logging
     -h, --help       Show this help message
     -V, --version    Show version information
 
@@ -75,7 +75,7 @@ parse_arguments() {
   while [[ $# -gt 0 ]]; do
     case "$1" in
     -v | --verbose)
-      VERBOSE=true
+      VERBOSE=false
       log "INFO" "Verbose mode enabled"
       shift
       ;;

@@ -7,6 +7,6 @@ read -rp "Enter your name: " name
 git config --global user.email "$email"
 git config --global user.name "$name"
 git config --global init.defaultBranch main
-git config --global core.editor "code"
+git config --global core.editor "nvim"
 
 echo "Git configuration completed. ✔️"

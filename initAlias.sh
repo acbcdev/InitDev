@@ -140,6 +140,7 @@ declare -a ALIASES=(
 
   "# ----Directory Shortcuts----"
   "alias this='code .'"
+  "alias anti='antigravity .'"
   "alias hm='cd ~'"
   "alias hd='cd ~/Dev/'"
   "alias hi='cd ~/Imágenes'"

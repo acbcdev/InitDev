@@ -47,5 +47,6 @@ git config --global user.name "$name"
 git config --global init.defaultBranch main
 git config --global core.editor "nvim"
 git config --global core.excludesfile ~/.gitignore_global
+git config --global merge.ff only
 
 echo "Git configuration completed. ✔️"

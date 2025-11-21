@@ -35,6 +35,7 @@ setup_git_config() {
   git config --global init.defaultBranch main
   git config --global core.editor "nvim"
   git config --global merge.ff only
+  git config --global pull.rebase false
 
   # Setup global gitignore
   local gitignore_global="$HOME/.gitignore_global"

@@ -34,13 +34,12 @@ setup_git_config() {
   git config --global user.name "$git_name"
   git config --global init.defaultBranch main
   git config --global core.editor "nvim"
-  git config --global merge.ff only
   git config --global pull.rebase false
 
   # Setup global gitignore
   local gitignore_global="$HOME/.gitignore_global"
   if [ ! -f "$gitignore_global" ]; then
-    cat > "$gitignore_global" << 'EOF'
+    cat >"$gitignore_global" <<'EOF'
 # Environment variables
 .env
 .env.local
@@ -154,7 +153,7 @@ setup_aliases() {
 
     # Check if it's a comment line
     if [[ "$alias_def" =~ ^# ]]; then
-      echo "$alias_def" >> "$SHELL_RC"
+      echo "$alias_def" >>"$SHELL_RC"
       continue
     fi
 
@@ -164,7 +163,7 @@ setup_aliases() {
     if [ -n "$alias_name" ]; then
       # Check if alias already exists
       if ! grep -q "^${alias_name}" "$SHELL_RC"; then
-        echo "$alias_def" >> "$SHELL_RC"
+        echo "$alias_def" >>"$SHELL_RC"
         ((aliases_added++))
       fi
     fi
@@ -205,7 +204,7 @@ setup_zoxide() {
   log "INFO" "Setting up zoxide..."
 
   if ! grep -q "zoxide init" "$SHELL_RC"; then
-    echo 'eval "$(zoxide init '$DETECTED_SHELL')"' >> "$SHELL_RC"
+    echo 'eval "$(zoxide init '$DETECTED_SHELL')"' >>"$SHELL_RC"
     log "SUCCESS" "Zoxide initialized in .$DETECTED_SHELL""rc"
   else
     log "INFO" "Zoxide already initialized"

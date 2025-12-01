@@ -35,6 +35,8 @@ setup_git_config() {
   git config --global init.defaultBranch main
   git config --global core.editor "nvim"
   git config --global pull.rebase false
+  git config --global alias.undo "reset --soft HEAD^"
+  git config --global alias.rank "shortlog -sn --no-merges"
 
   # Setup global gitignore
   local gitignore_global="$HOME/.gitignore_global"

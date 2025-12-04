@@ -17,6 +17,8 @@ INSTALL_DEPS=false
 INSTALL_NODE=false
 INSTALL_BUN_FLAG=false
 SETUP_GIT=false
+SETUP_GIT_USER=false
+SETUP_GIT_SETTINGS=false
 SETUP_ALIASES_FLAG=false
 SETUP_DIRS=false
 SETUP_ZOXIDE_FLAG=false
@@ -40,14 +42,16 @@ OPTIONS:
   -v, --version           Show version information
 
 INSTALL OPTIONS:
-  --install-all           Run complete setup non-interactively
-  --deps                  Install dependencies only
-  --node                  Install Node.js tools only
-  --bun                   Install Bun only
-  --git                   Configure Git only
-  --aliases               Setup shell aliases only
-  --dirs                  Create directories only
-  --zoxide                Setup Zoxide only
+   --install-all           Run complete setup non-interactively
+   --deps                  Install dependencies only
+   --node                  Install Node.js tools only
+   --bun                   Install Bun only
+   --git                   Configure Git only (complete setup)
+   --git-user              Configure Git user (name/email) only
+   --git-settings          Configure Git settings only (no user config)
+   --aliases               Setup shell aliases only
+   --dirs                  Create directories only
+   --zoxide                Setup Zoxide only
 
 MODIFIERS:
   --skip-check            Skip system validation (use with caution)
@@ -176,6 +180,16 @@ execute_components() {
     executed=true
   fi
 
+  if [[ "$SETUP_GIT_USER" == true ]]; then
+    setup_git_user_config
+    executed=true
+  fi
+
+  if [[ "$SETUP_GIT_SETTINGS" == true ]]; then
+    setup_git_general_config
+    executed=true
+  fi
+
   if [[ "$SETUP_ALIASES_FLAG" == true ]]; then
     setup_aliases
     executed=true
@@ -253,6 +267,14 @@ parse_args() {
         SETUP_GIT=true
         shift
         ;;
+      --git-user)
+        SETUP_GIT_USER=true
+        shift
+        ;;
+      --git-settings)
+        SETUP_GIT_SETTINGS=true
+        shift
+        ;;
       --aliases)
         SETUP_ALIASES_FLAG=true
         shift
@@ -278,6 +300,7 @@ parse_args() {
      [[ "$CHECK_ONLY" == false ]] && [[ "$INSTALL_ALL" == false ]] && \
      [[ "$INSTALL_DEPS" == false ]] && [[ "$INSTALL_NODE" == false ]] && \
      [[ "$INSTALL_BUN_FLAG" == false ]] && [[ "$SETUP_GIT" == false ]] && \
+     [[ "$SETUP_GIT_USER" == false ]] && [[ "$SETUP_GIT_SETTINGS" == false ]] && \
      [[ "$SETUP_ALIASES_FLAG" == false ]] && [[ "$SETUP_DIRS" == false ]] && \
      [[ "$SETUP_ZOXIDE_FLAG" == false ]]; then
     SHOW_MENU=true

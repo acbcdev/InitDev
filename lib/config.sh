@@ -5,17 +5,17 @@
 ###############################################################################
 
 ###############################################################################
-# Setup Git configuration
+# Setup Git user configuration (name and email only)
 ###############################################################################
-setup_git_config() {
-  log "INFO" "Setting up Git configuration..."
+setup_git_user_config() {
+  log "INFO" "Setting up Git user configuration..."
 
   # Check if already configured
   if git config --global user.name &>/dev/null; then
-    log "WARN" "Git already configured as: $(git config --global user.name) <$(git config --global user.email)>"
-    read -rp "Do you want to reconfigure? (y/n): " reconfigure
+    log "WARN" "Git user already configured as: $(git config --global user.name) <$(git config --global user.email)>"
+    read -rp "Do you want to reconfigure user settings? (y/n): " reconfigure
     if [[ "$reconfigure" != "y" ]]; then
-      log "INFO" "Skipping Git configuration"
+      log "INFO" "Skipping Git user configuration"
       return
     fi
   fi
@@ -29,9 +29,20 @@ setup_git_config() {
     log "WARN" "Email format may be invalid: $git_email"
   fi
 
-  # Set git config
+  # Set git user config
   git config --global user.email "$git_email"
   git config --global user.name "$git_name"
+
+  log "SUCCESS" "Git user configuration completed"
+}
+
+###############################################################################
+# Setup Git general configuration (settings only, no user config)
+###############################################################################
+setup_git_general_config() {
+  log "INFO" "Setting up Git general configuration..."
+
+  # Set git config (general settings)
   git config --global init.defaultBranch main
   git config --global core.editor "nvim"
   git config --global pull.rebase false
@@ -91,7 +102,22 @@ EOF
     log "INFO" "Global gitignore already exists"
   fi
 
-  log "SUCCESS" "Git configuration completed"
+  log "SUCCESS" "Git general configuration completed"
+}
+
+###############################################################################
+# Setup Git configuration (complete setup - user + general settings)
+###############################################################################
+setup_git_config() {
+  log "INFO" "Setting up complete Git configuration..."
+
+  # Setup user config first
+  setup_git_user_config
+
+  # Setup general config
+  setup_git_general_config
+
+  log "SUCCESS" "Complete Git configuration finished"
 }
 
 ###############################################################################

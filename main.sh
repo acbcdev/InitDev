@@ -81,6 +81,7 @@ main() {
     echo "source \$HOME/.$DETECTED_SHELL""rc"
   elif [[ "$INSTALL_DEPS" == true ]] || [[ "$INSTALL_NODE" == true ]] || \
        [[ "$INSTALL_BUN_FLAG" == true ]] || [[ "$SETUP_GIT" == true ]] || \
+       [[ "$SETUP_GIT_USER" == true ]] || [[ "$SETUP_GIT_SETTINGS" == true ]] || \
        [[ "$SETUP_ALIASES_FLAG" == true ]] || [[ "$SETUP_DIRS" == true ]] || \
        [[ "$SETUP_ZOXIDE_FLAG" == true ]]; then
     # Execute selected components

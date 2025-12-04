@@ -4,6 +4,9 @@
 # Configuration Module - Git, Aliases, Directories, and Shell Config
 ###############################################################################
 
+# Configuration variables
+readonly AUTO_UPDATE_BREW="${AUTO_UPDATE_BREW:-true}"
+
 ###############################################################################
 # Setup Git user configuration (name and email only)
 ###############################################################################

@@ -75,7 +75,8 @@ MENU OPTIONS:
   7, zoxide          Setup Zoxide
   8, all, complete   Run Complete Setup
   9, log             View Log
-  10, exit           Exit InitDev
+  10, update         Update Homebrew
+  11, exit           Exit InitDev
 
 EXAMPLES:
   Type "1" or "deps" to install dependencies
@@ -129,7 +130,8 @@ validate_menu_choice() {
       7|zoxide) echo "Setup Zoxide" ;;
       8|all|complete|setup) echo "Run Complete Setup" ;;
       9|log|view) echo "View Log" ;;
-      10|exit) echo "Exit" ;;
+      10|update|brew) echo "Update Homebrew" ;;
+      11|exit) echo "Exit" ;;
       *) return 1 ;;
     esac
   elif [[ "$menu_type" == "git" ]]; then
@@ -162,9 +164,10 @@ show_main_menu() {
     echo "3) Install Bun             4) Configure Git"
     echo "5) Setup Aliases           6) Create Directories"
     echo "7) Setup Zoxide            8) Run Complete Setup"
-    echo "9) View Log               10) Exit"
+    echo "9) View Log               10) Update Homebrew"
+    echo "11) Exit"
     echo ""
-    echo -n "Select option [1-10] or type command: "
+    echo -n "Select option [1-11] or type command: "
     read -r input
     
     # Convert to lowercase for case-insensitive matching
@@ -211,6 +214,18 @@ show_main_menu() {
             less "$LOG_FILE"
           else
             log "WARN" "Log file not found"
+          fi
+          ;;
+        "Update Homebrew")
+          if command -v brew &> /dev/null; then
+            log "INFO" "Updating Homebrew..."
+            if brew update; then
+              log "SUCCESS" "Homebrew updated successfully"
+            else
+              log "WARN" "Homebrew update failed"
+            fi
+          else
+            log "WARN" "Homebrew is not installed"
           fi
           ;;
         "Exit")

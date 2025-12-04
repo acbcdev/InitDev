@@ -48,6 +48,33 @@ detect_shell() {
 }
 
 ###############################################################################
+# Prompt user for Homebrew update
+###############################################################################
+prompt_brew_update() {
+  # Skip if auto-update is disabled
+  if [[ "$AUTO_UPDATE_BREW" == "false" ]]; then
+    log "INFO" "Auto-update disabled, skipping Homebrew update"
+    return 0
+  fi
+
+  echo -n "Would you like to update Homebrew? [Y/n]: "
+  read -r response
+  case "$response" in
+    [nN][oO]|[nN])
+      log "INFO" "Skipping Homebrew update"
+      ;;
+    *)
+      log "INFO" "Updating Homebrew..."
+      if brew update; then
+        log "SUCCESS" "Homebrew updated successfully"
+      else
+        log "WARN" "Homebrew update failed"
+      fi
+      ;;
+  esac
+}
+
+###############################################################################
 # Check and install Homebrew
 ###############################################################################
 check_homebrew() {
@@ -56,7 +83,7 @@ check_homebrew() {
     install_homebrew
   else
     log "SUCCESS" "Homebrew is installed"
-    brew update
+    prompt_brew_update
   fi
 }
 

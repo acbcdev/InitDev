@@ -74,6 +74,11 @@ install_node_tools() {
   log "INFO" "Installing pnpm..."
   npm install -g pnpm
 
+  # Configure pnpm globally
+  log "INFO" "Configuring pnpm global settings..."
+  pnpm config set ignore-scripts true --location global
+  pnpm config set engine-strict true --location global
+
   log "SUCCESS" "Node.js tools installed"
 }
 

@@ -175,6 +175,9 @@ declare -a ALIASES=(
   "# ---- Init Apps ----"
   "eval "$(zoxide init zsh)"
   "eval "$(fnm env)"
+
+  "# ----Custom Aliases----"
+  "alias matt='npx skills add https://github.com/mattpocock/skills'"
 )
 
 # Main execution

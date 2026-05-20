@@ -51,9 +51,14 @@ detect_shell() {
 # Prompt user for Homebrew update
 ###############################################################################
 prompt_brew_update() {
-  # Skip if auto-update is disabled
   if [[ "$AUTO_UPDATE_BREW" == "false" ]]; then
     log "INFO" "Auto-update disabled, skipping Homebrew update"
+    return 0
+  fi
+
+  # Non-interactive mode: skip prompt entirely
+  if [[ "$SHOW_MENU" == "false" ]]; then
+    log "INFO" "Skipping Homebrew update (non-interactive mode)"
     return 0
   fi
 

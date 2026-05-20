@@ -39,19 +39,21 @@ OPTIONS:
   -m, --menu              Show interactive menu (default behavior)
   -h, --help              Display this help message
   -c, --check             Check system requirements only
-  -v, --version           Show version information
+  -v, --verbose           Enable verbose logging (shows INFO messages)
+  -q, --quiet             Disable verbose logging (default)
+  -V, --version           Show version information
 
 INSTALL OPTIONS:
-   --install-all           Run complete setup non-interactively
-   --deps                  Install dependencies only
-   --node                  Install Node.js tools only
-   --bun                   Install Bun only
-   --git                   Configure Git only (complete setup)
-   --git-user              Configure Git user (name/email) only
-   --git-settings          Configure Git settings only (no user config)
-   --aliases               Setup shell aliases only
-   --dirs                  Create directories only
-   --zoxide                Setup Zoxide only
+  -I, --install-all        Run complete setup non-interactively
+  -D, --deps               Install dependencies only
+  -N, --node               Install Node.js tools only
+  -B, --bun                Install Bun only
+  -g, --git                Configure Git only (complete setup)
+  -u, --git-user           Configure Git user (name/email) only
+  -s, --git-settings       Configure Git settings only (no user config)
+  -a, --aliases            Setup shell aliases only
+  -d, --dirs               Create directories only
+  -z, --zoxide             Setup Zoxide only
 
 MODIFIERS:
   --skip-check            Skip system validation (use with caution)
@@ -61,8 +63,8 @@ EXAMPLES:
   ./main.sh -m            Same as above
   ./main.sh --check       Check if system requirements are met
   ./main.sh --install-all Run complete setup automatically
-  ./main.sh --deps --node Install dependencies and Node.js only
-  ./main.sh --git --aliases Configure Git and setup aliases
+  ./main.sh -D -N          Install dependencies and Node.js only
+  ./main.sh -g -a          Configure Git and setup aliases
   ./main.sh -h            Show this help message
 
 EOF
@@ -232,11 +234,19 @@ parse_args() {
         CHECK_ONLY=true
         shift
         ;;
-      -v | --version)
+      -v | --verbose)
+        VERBOSE=true
+        shift
+        ;;
+      -q | --quiet)
+        VERBOSE=false
+        shift
+        ;;
+      -V | --version)
         SHOW_VERSION=true
         shift
         ;;
-      --install-all)
+      -I | --install-all)
         INSTALL_ALL=true
         INSTALL_DEPS=true
         INSTALL_NODE=true
@@ -251,39 +261,39 @@ parse_args() {
         SKIP_CHECK=true
         shift
         ;;
-      --deps)
+      -D | --deps)
         INSTALL_DEPS=true
         shift
         ;;
-      --node)
+      -N | --node)
         INSTALL_NODE=true
         shift
         ;;
-      --bun)
+      -B | --bun)
         INSTALL_BUN_FLAG=true
         shift
         ;;
-      --git)
+      -g | --git)
         SETUP_GIT=true
         shift
         ;;
-      --git-user)
+      -u | --git-user)
         SETUP_GIT_USER=true
         shift
         ;;
-      --git-settings)
+      -s | --git-settings)
         SETUP_GIT_SETTINGS=true
         shift
         ;;
-      --aliases)
+      -a | --aliases)
         SETUP_ALIASES_FLAG=true
         shift
         ;;
-      --dirs)
+      -d | --dirs)
         SETUP_DIRS=true
         shift
         ;;
-      --zoxide)
+      -z | --zoxide)
         SETUP_ZOXIDE_FLAG=true
         shift
         ;;

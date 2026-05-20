@@ -13,6 +13,7 @@ readonly NC='\033[0m' # No Color
 
 # Configuration
 LOG_FILE="${HOME}/.initdev_log"
+VERBOSE="${VERBOSE:-false}"
 
 ###############################################################################
 # Log to file and console with timestamp
@@ -32,7 +33,9 @@ log() {
   # Print to console with simple prefix (no brackets on terminal)
   case "$level" in
     INFO)
-      echo -e "${BLUE}▶${NC} $message"
+      if [[ "$VERBOSE" == "true" ]]; then
+        echo -e "${BLUE}▶${NC} $message"
+      fi
       ;;
     SUCCESS)
       echo -e "${GREEN}✓${NC} $message"

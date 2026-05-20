@@ -129,78 +129,60 @@ setup_git_config() {
 setup_aliases() {
   log "INFO" "Setting up shell aliases..."
 
-  # Create backup of shell config
-  local backup_file="${HOME}/.${DETECTED_SHELL}rc_backup_$(date '+%Y%m%d_%H%M%S').bak"
-  cp "$SHELL_RC" "$backup_file"
-  log "SUCCESS" "Backup created at $backup_file"
+  # Load aliases definition
+  local aliases_file="${SCRIPT_DIR}/lib/aliases.sh"
+  if [ ! -f "$aliases_file" ]; then
+    log "ERROR" "Aliases file not found: $aliases_file"
+    return 1
+  fi
+  source "$aliases_file"
 
-  # Define aliases
-  local aliases=(
-    "# ----General Aliases----"
-    "alias cl='clear'"
-    "alias neo='fastfetch'"
-    "alias le='exa --level=1 --tree --icons'"
-    "alias lr='exa --tree --level=1 --all --icons'"
-    ""
-    "# ----Package Manager Aliases----"
-    "alias pnpmd='pnpm run dev'"
-    "alias pnpmb='pnpm run build'"
-    "alias pnpms='pnpm run start'"
-    "alias pnpmt='pnpm run test'"
-    "alias pnpmr='pnpm run'"
-    "alias pnpmi='pnpm install'"
-    "alias bunb='bun run build'"
-    "alias bund='bun dev'"
-    ""
-    "# ----Navigation Aliases----"
-    "alias hm='cd ~'"
-    "alias hd='cd ~/Dev/'"
-    "alias projs='cd ~/Dev/projects/'"
-    "alias study='cd ~/Dev/platzi/'"
-    "alias OpenSrc='cd ~/Dev/cmt'"
-    "alias cb='cd ..'"
-    "alias cbb='cd ../..'"
-    "alias lg='lazygit'"
-    ""
-    "# ----Git Aliases----"
-    "alias ggclone='git clone'"
-    "alias ggcmt='git commit -am'"
-    "alias ggadd='git add .'"
-    "alias ggsta='git status'"
-    "alias gglog='git log'"
-    "alias ggswi='git switch'"
-    ""
-    "# ----System Aliases----"
-    "alias reload='source \$HOME/.$DETECTED_SHELL""rc'"
-    "alias python='python3'"
-  )
+  # Create/overwrite single fixed backup of shell config
+  local backup_file="${HOME}/.${DETECTED_SHELL}rc.backup.init-alias"
+  cp "$SHELL_RC" "$backup_file"
+  log "SUCCESS" "Backup saved to $backup_file"
 
   local aliases_added=0
-  for alias_def in "${aliases[@]}"; do
-    # Skip empty lines
+  local aliases_skipped=0
+  local start_time=$SECONDS
+
+  for alias_def in "${ALIASES[@]}"; do
     if [[ -z "$alias_def" ]]; then
       continue
     fi
 
-    # Check if it's a comment line
     if [[ "$alias_def" =~ ^# ]]; then
       echo "$alias_def" >>"$SHELL_RC"
       continue
     fi
 
-    # Extract alias name
     local alias_name=$(echo "$alias_def" | grep -oE "^alias [^=]+" || echo "")
 
     if [ -n "$alias_name" ]; then
-      # Check if alias already exists
       if ! grep -q "^${alias_name}" "$SHELL_RC"; then
         echo "$alias_def" >>"$SHELL_RC"
         ((aliases_added++))
+      else
+        ((aliases_skipped++))
       fi
     fi
   done
 
-  log "SUCCESS" "Added $aliases_added aliases"
+  local elapsed=$(( SECONDS - start_time ))
+  local total=$(( aliases_added + aliases_skipped ))
+
+  echo ""
+  echo -e "  ══════════════════════════════"
+  echo -e "     ${BLUE}Alias Setup Stats${NC}"
+  echo -e "  ══════════════════════════════"
+  echo -e "  ${GREEN}✓${NC} Created:  $aliases_added"
+  echo -e "  ${YELLOW}→${NC} Skipped:  $aliases_skipped"
+  echo -e "  ${BLUE}─${NC} Total:    $total"
+  echo -e "  ⏱  Time:    ${elapsed}s"
+  echo -e "  ══════════════════════════════"
+  echo ""
+
+  log "SUCCESS" "Alias setup complete: $aliases_added created, $aliases_skipped skipped"
   log "INFO" "To apply aliases, run: source \$SHELL_RC"
 }
 

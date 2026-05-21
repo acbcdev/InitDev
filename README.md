@@ -5,10 +5,38 @@ Automated development environment setup for macOS and Linux using Homebrew.
 ## Quick Start
 
 ```bash
-./main.sh
+./main.sh              # Interactive menu (default)
+./main.sh -m           # Show menu explicitly
+./main.sh --check      # Check system requirements
+./main.sh --install-all # Automated complete setup
+./main.sh --help       # Show all options
 ```
 
-This will launch an interactive menu where you can choose what to set up.
+### Selective Installation
+
+```bash
+./main.sh --deps --node           # Install only dependencies and Node.js
+./main.sh --git --aliases         # Configure git and setup aliases
+./main.sh --deps --git --zoxide   # Multiple components in order
+```
+
+### Component Flags
+
+- `--deps` - Install core dependencies
+- `--node` - Install Node.js tools (fnm + LTS + pnpm)
+- `--bun` - Install Bun runtime
+- `--git` - Configure git
+- `--aliases` - Setup shell aliases
+- `--dirs` - Create directory structure
+- `--zoxide` - Setup zoxide navigation
+
+### Global Flags
+
+- `--install-all` - Run complete setup non-interactively
+- `--skip-check` - Skip system validation
+- `-h, --help` - Show help message
+- `-v, --version` - Show version information
+- `-c, --check` - Check requirements only
 
 ## Features
 
@@ -99,6 +127,3 @@ source ~/.zshrc  # for zsh
 source ~/.bashrc # for bash
 ```
 
-## Components
-
-The `components/` directory contains individual setup scripts that are called by main.sh but can also be run independently if needed.

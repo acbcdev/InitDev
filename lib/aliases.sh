@@ -85,5 +85,5 @@ declare -a ALIASES=(
 
   "# ----Custom Aliases----"
   "alias matt='npx skills@latest add https://github.com/mattpocock/skills'"
-  "alias autoskills='npx skills@latest'"
+  "alias autoskills='npx autoskills'"
 )

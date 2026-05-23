@@ -86,4 +86,7 @@ declare -a ALIASES=(
   "# ----Custom Aliases----"
   "alias matt='npx skills@latest add https://github.com/mattpocock/skills'"
   "alias autoskills='npx autoskills'"
+  "alias schedule='cd /Users/acbc/Dev/projects/own && claude /cal'"
+  "alias initDev='cd /Users/acbc/Dev/projects/InitDev && ./main.sh'"
+  "alias karpa='npx skills add https://github.com/multica-ai/andrej-karpathy-skills --skill karpathy-guidelines'"
 )
